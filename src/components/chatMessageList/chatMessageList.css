@@ -1,0 +1,11 @@
+.chat-message--list {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    flex-direction: column;
+    padding: 0;
+    align-items: flex-start;
+    overflow-y: scroll;
+    list-style: none;
+}

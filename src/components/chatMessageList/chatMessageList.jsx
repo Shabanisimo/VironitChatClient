@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import ChatMessage from "../chatMessage/chatMessage";
 import "./chatMessageList.css";
 import Notification from "../notification/notofication";
+import { connect } from "react-redux";
 
 class ChatMessageList extends Component {
   render() {
     let id = 0;
     return (
       <ul className="chat-message--list">
-        {this.props.messages.map(message => {
+        {this.props.messageList.map(message => {
           if (message.type === 1) {
             return (
               <ChatMessage
@@ -25,4 +26,9 @@ class ChatMessageList extends Component {
   }
 }
 
-export default ChatMessageList;
+export default connect(
+  messageList => ({
+    messageList: messageList.messageList
+  }),
+  dispatch => ({})
+)(ChatMessageList);

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class ChatForm extends Component {
   constructor(props) {
@@ -24,4 +25,9 @@ class ChatForm extends Component {
   }
 }
 
-export default ChatForm;
+export default connect(
+  messageList => ({
+    messageList: messageList
+  }),
+  dispatch => ({})
+)(ChatForm);

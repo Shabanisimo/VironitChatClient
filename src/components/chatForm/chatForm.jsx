@@ -9,7 +9,7 @@ class ChatForm extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
     let message = this.refs.message.value;
-    this.props.client.send(message);
+    this.props.client.emit("message", message);
   }
 
   render() {

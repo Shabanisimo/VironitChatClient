@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import io from "socket.io-client";
 import ChatForm from "../chatForm/chatForm";
 import ChatMessageList from "../chatMessageList/chatMessageList";
 import "./chatDialogWindow.css";
@@ -7,28 +8,21 @@ class ChatDialogWindow extends Component {
   constructor() {
     super();
 
-    this.socket = new WebSocket("ws://localhost:3333");
+    this.socket = io.connect("http://localhost:3020");
 
-    this.socket.onclose = () => {
-      console.log("Disconnected");
-    };
-
-    this.socket.onopen = () => {
+    this.socket.on("connect", () => {
       console.log("Connect");
-    };
+    });
 
-    this.socket.onmessage = msg => {
-      let t;
-      try {
-        t = JSON.parse(msg.data);
-        this.setState({
-          messages: [...this.state.messages, JSON.parse(msg.data)]
-        });
-      } catch (error) {
-        t = msg.data;
-      }
-      console.log(t);
-    };
+    this.socket.on("disconnect", () => {
+      console.log("Disconnected");
+    });
+
+    this.socket.on("msg", msg => {
+      this.setState({
+        messages: [...this.state.messages, msg]
+      });
+    });
 
     this.state = {
       messages: [],

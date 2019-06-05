@@ -13,9 +13,19 @@
     "redux": "^4.0.1"
   },
   "devDependencies": {
+    "husky": "^2.3.0",
+    "lint-staged": "^8.1.7",
+    "prettier": "^1.17.1",
     "socket.io-client": "^2.2.0"
   },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,scss,css}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ]
+  },
   "scripts": {
+    "precommit": "lint-staged",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",

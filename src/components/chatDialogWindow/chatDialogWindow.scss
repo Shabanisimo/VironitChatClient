@@ -1,0 +1,44 @@
+.chat-dialog-window {
+    max-width: 1280px;
+    min-width: 840px;
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chat-message-list {
+    width: 100%;
+}
+
+.chat-form--block {
+    width: 100%;
+    background-color: lightgray;
+}
+
+.chat-form {
+    display: flex;
+    padding: 10px;
+}
+
+.chat-form--input {
+    max-width: 1120px;
+    width: 100%;
+    max-height: 50px;
+    border: 1px solid black;
+    font-size: 16px;
+    line-height: 21px;
+    text-indent: 5px;
+    font-family: Roboto;
+    resize: none;
+}
+
+.chat-form--btn {
+    background-color: aqua;
+    border: none;
+    height: 50px;
+    width: 130px;
+    border: 1px solid black;
+    font-size: 14px;
+    font-weight: 700;
+}

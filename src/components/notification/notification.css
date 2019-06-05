@@ -1,14 +1,12 @@
 .message-notification {
-    display: block;
-    background-color: lightgray;
-    border-radius: 5px;
-    margin: 5px auto;
-}
+  display: block;
+  background-color: lightgray;
+  border-radius: 5px;
+  margin: 5px auto; }
 
 .message-notification--text {
-    font-size: 10px;
-    line-height: 10px;
-    font-family: Roboto;
-    font-style: italic;
-    margin: 5px;
-}
+  font-size: 10px;
+  line-height: 10px;
+  font-family: Roboto;
+  font-style: italic;
+  margin: 5px; }

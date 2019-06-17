@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import ChatMessage from "../chatMessage/chatMessage";
-import "./chatMessageList.css";
-import Notification from "../notification/notofication";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import ChatMessage from '../chatMessage/chatMessage';
+import './chatMessageList.css';
+import Notification from '../notification/notofication';
+import { connect } from 'react-redux';
 
 class ChatMessageList extends Component {
   render() {
@@ -28,7 +28,7 @@ class ChatMessageList extends Component {
 
 export default connect(
   messageList => ({
-    messageList: messageList.messageList
+    messageList: messageList.messageList,
   }),
   dispatch => ({})
 )(ChatMessageList);

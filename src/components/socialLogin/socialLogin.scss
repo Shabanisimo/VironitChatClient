@@ -1,16 +1,15 @@
-.social-login--block {
-    width: 100%;
-}
+.social-login {
+  width: 100%;
 
-.social-login--list {
+  &--list {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     list-style: none;
     padding: 0;
-}
+  }
 
-.social-login--btn {
+  &--btn {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -20,13 +19,14 @@
     border: 1px solid lightgray;
     transition: 0.1s ease-out;
     cursor: pointer;
-}
 
-.social-login--btn:hover {
-    background-color: beige;
-}
+    &:hover {
+      background-color: beige;
+    }
+  }
 
-.social-login--img {
+  &--img {
     height: 30px;
     margin-right: 5px;
+  }
 }

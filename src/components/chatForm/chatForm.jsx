@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class ChatForm extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class ChatForm extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
     let message = this.refs.message.value;
-    this.props.client.emit("message", message);
+    this.props.client.emit('message', message);
   }
 
   render() {
@@ -27,7 +27,7 @@ class ChatForm extends Component {
 
 export default connect(
   messageList => ({
-    messageList: messageList
+    messageList: messageList,
   }),
   dispatch => ({})
 )(ChatForm);

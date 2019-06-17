@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import SocialLogin from "../socialLogin/socialLogin";
-import "./loginForm.css";
+import React, { Component } from 'react';
+import { BrowserRouter as Link } from 'react-router-dom';
+import SocialLogin from '../socialLogin/socialLogin';
+import './loginForm.css';
 
 export default class LoginForm extends Component {
   render() {
@@ -12,8 +13,10 @@ export default class LoginForm extends Component {
             className="login-form--password login-form--input"
             type="password"
           />
-          <button className="login-form--btn">Sign In</button>
-          <a className="login-form-link">Registration</a>
+          <div>
+            <Link to="/registration">Registration</Link>
+            <button className="login-form--btn">Sign In</button>
+          </div>
         </form>
         <SocialLogin />
       </div>

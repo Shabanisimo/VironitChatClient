@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "./notification.css";
+import React, { Component } from 'react';
+import './notification.css';
 
 export default class Notofication extends Component {
   render() {

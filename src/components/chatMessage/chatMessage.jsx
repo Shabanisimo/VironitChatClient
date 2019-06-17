@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import UserImage from "../userImage/userImage";
-import "./chatMessage.css";
+import React, { Component } from 'react';
+import UserImage from '../userImage/userImage';
+import './chatMessage.css';
 
 class ChatMessage extends Component {
   render() {

@@ -8,13 +8,16 @@ import reducer from './reducers';
 import './index.css';
 import './normolize.css';
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
-ReactDOM.render((
-  <BrowserRouter>
-    <Provider store={store}>
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
       <App />
-    </Provider>
-  </BrowserRouter>
-  ),document.getElementById('root')
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
 );

@@ -2,29 +2,23 @@ import React, { Component } from 'react';
 import googleLogo from '../../../assets/img/icons8-google.svg';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { addUserInfo } from '../../../store/actions/userInfoAction';
+import request from '../../../utils/requests';
 
 class GoogleButton extends Component {
   queryToServer = token => {
-    const myInit = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ token }),
-    };
-    fetch('http://localhost:3040/api/signin', myInit)
-      .then(res => res.json())
-      .then(data => this.props.onUpdateUser(data))
-      .then(this.props.history.push('/chat'));
+    request(`user/signin/google`, 'POST', { token })
+      .then(data => {
+        localStorage.setItem('token', data[0].token);
+        this.props.addUserInfo(data[0]);
+        this.props.history.push('/chat');
+      })
+      .catch(err => console.log('ERROR ' + err));
   };
 
   componentDidMount() {
     window.gapi.load('auth2', function() {
-      window.gapi.auth2
-        .init({ client_id: process.env.REACT_APP_GOOGLE_KEY })
-        .then(() => {
-          console.log('Init OK');
-        });
+      window.gapi.auth2.init({ client_id: process.env.REACT_APP_GOOGLE_KEY });
     });
   }
 
@@ -36,7 +30,7 @@ class GoogleButton extends Component {
         this.queryToServer(id_token);
       })
       .then(res => console.log('Its okey'))
-      .catch(err => console.log('Init NOT ok ', err));
+      .catch(err => console.log('ERROR ', err));
   };
 
   render() {
@@ -61,17 +55,9 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onUpdateUser: userInfo => {
-      dispatch({ type: 'ADD_INFO', payload: userInfo });
-    },
-  };
-};
-
 export default withRouter(
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    { addUserInfo }
   )(GoogleButton)
 );

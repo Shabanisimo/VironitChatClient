@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import GroupIcon from '../../assets/img/group.svg';
 import ExitIcon from '../../assets/img/exit.svg';
 import SettingIcon from '../../assets/img/settings.svg';
-import LeftArrow from '../../assets/img/left-arrow.svg';
 import RightArrow from '../../assets/img/right-arrow.svg';
 import SVG from 'react-inlinesvg';
+import CreateRoomFrom from '../createRoomForm/createRoomForm';
 
 export default class SideMenu extends Component {
   constructor() {
@@ -12,13 +12,19 @@ export default class SideMenu extends Component {
 
     this.state = {
       isOpen: false,
+      showPopup: false,
     };
 
     this.onOpen = this.onOpen.bind(this);
+    this.togglePopup = this.togglePopup.bind(this);
   }
 
   onOpen() {
     this.setState({ isOpen: !this.state.isOpen });
+  }
+
+  togglePopup() {
+    this.setState({ showPopup: !this.state.showPopup });
   }
 
   render() {
@@ -27,12 +33,15 @@ export default class SideMenu extends Component {
         <ul className="side-menu--list">
           <li className="side-menu--item" onClick={this.onOpen}>
             <SVG
-              className="side-menu--img"
-              src={this.state.isOpen ? LeftArrow : RightArrow}
+              className={
+                this.state.isOpen
+                  ? 'side-menu--img arrow_open'
+                  : 'side-menu--img arow'
+              }
+              src={RightArrow}
             />
           </li>
-          <li className="side-menu--item">
-            {/* <img src={GroupIcon} alt="" className="side-menu--img" /> */}
+          <li className="side-menu--item" onClick={this.togglePopup}>
             <SVG src={GroupIcon} className="side-menu--img" />
             <p className="side-menu--text">Create Room</p>
           </li>
@@ -40,11 +49,14 @@ export default class SideMenu extends Component {
             <SVG src={SettingIcon} className="side-menu--img" />
             <p className="side-menu--text">Settings</p>
           </li>
-          <li className="side-menu--item">
+          <li className="side-menu--item" onClick={this.props.logOut}>
             <SVG src={ExitIcon} className="side-menu--img" />
             <p className="side-menu--text">Log Out</p>
           </li>
         </ul>
+        {this.state.showPopup ? (
+          <CreateRoomFrom togglePopup={this.togglePopup} />
+        ) : null}
       </div>
     );
   }

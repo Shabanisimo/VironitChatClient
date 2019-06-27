@@ -13,11 +13,11 @@
     font-weight: 900;
     font-family: Roboto;
   }
+}
 
-  &--user-block {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-  }
+.user-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserImage from '../userImage/userImage';
+import UserItem from '../userItem/userItem';
 import './header.css';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -12,15 +12,13 @@ class Header extends Component {
           className="header--icon"
           onClick={() => this.props.history.push('/chat')}
         >
-          Chat
+          &lt;Noname&#47;&gt;
         </a>
-        <div className="header--user-block">
-          <UserImage src={this.props.userInfo.picture} />
-          <div>
-            <p>{this.props.userInfo.name}</p>
-          </div>
-          <button>Sign Out</button>
-        </div>
+        <UserItem
+          imgUrl={this.props.userInfo.imgUrl}
+          name={this.props.userInfo.name}
+          surname={this.props.userInfo.surname}
+        />
       </header>
     );
   }

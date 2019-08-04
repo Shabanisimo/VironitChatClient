@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import Message from '../message/message';
-import { connect } from 'react-redux';
 
 class MessageList extends Component {
   render() {
-    let id = 0;
+    const { room, userId } = this.ptops;
+    const { Users, Messages } = room;
     return (
       <ul className="message--list">
-        {this.props.messageList.map(message => {
+        {Messages.map((message, i, messages) => {
+          const { messageText, date, SenderId, id } = message;
+          const showImage =
+            messages[i + 1] && SenderId === messages[i + 1].SenderId;
           return (
             <Message
-              userToken={message.Sender.token}
-              text={message.messageText}
-              userName={message.Sender.name}
-              userImg={message.Sender.imgUrl}
-              date={message.date}
-              key={id++}
+              messageText={messageText}
+              date={date}
+              user={SenderId === userId}
+              userInfo={Users[SenderId]}
+              showImage={showImage}
+              key={id}
             />
           );
         })}
@@ -24,9 +27,4 @@ class MessageList extends Component {
   }
 }
 
-export default connect(
-  messageList => ({
-    messageList: messageList.messageList,
-  }),
-  dispatch => ({})
-)(MessageList);
+export default MessageList;

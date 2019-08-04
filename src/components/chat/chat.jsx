@@ -7,10 +7,15 @@ const MessageListWithScroll = withScroll(MessageList);
 
 export default class Chat extends Component {
   render() {
+    const { onSendMessage, room, userId } = this.props;
     return (
       <div className="chat">
-        <MessageListWithScroll className="chat-message-list" />
-        <ChatForm onSendMessage={this.props.onSendMessage} />
+        <MessageListWithScroll
+          className="chat-message-list"
+          room={room}
+          userId={userId}
+        />
+        <ChatForm onSendMessage={onSendMessage} />
       </div>
     );
   }

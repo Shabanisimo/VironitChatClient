@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class RoomImage extends Component {
-  render() {
-    return (
-      <div>
-        <img
-          className="room-image"
-          src={this.props.image}
-          alt={this.props.name}
-        />
-      </div>
-    );
-  }
+function RoomImage({ image, name }) {
+  return (
+    <div>
+      <img className="room-image" src={image} alt={name} />
+    </div>
+  );
 }
+
+export default RoomImage;

@@ -50,7 +50,7 @@ export const asyncCreateRoom = (roomName, userList) => dispatch =>
     }).catch(err => console.log(err));
   });
 
-export const asyncLoadRoomInfo = id => dispatch => {
+export const changeActiveRoom = id => dispatch => {
   const roomInfo = {};
   roomInfo.roomId = id;
   dispatch(updateRoomInfo(roomInfo));

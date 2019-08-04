@@ -2,20 +2,9 @@ import React, { Component } from 'react';
 import googleLogo from '../../../assets/img/icons8-google.svg';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { addUserInfo } from '../../../store/actions/userInfoAction';
-import request from '../../../utils/requests';
+import { asyncGoogleSignIn } from '../../../store/actions/user';
 
 class GoogleButton extends Component {
-  queryToServer = token => {
-    request(`user/signin/google`, 'POST', { token })
-      .then(data => {
-        localStorage.setItem('token', data[0].token);
-        this.props.addUserInfo(data[0]);
-        this.props.history.push('/chat');
-      })
-      .catch(err => console.log('ERROR ' + err));
-  };
-
   componentDidMount() {
     window.gapi.load('auth2', function() {
       window.gapi.auth2.init({ client_id: process.env.REACT_APP_GOOGLE_KEY });
@@ -24,10 +13,12 @@ class GoogleButton extends Component {
 
   onSignIn = () => {
     const GoogleAuth = window.gapi.auth2.getAuthInstance();
+    const { asyncGoogleSignIn } = this.props;
+
     GoogleAuth.signIn({ scope: 'profile email' })
       .then(user => {
         const id_token = user.getAuthResponse().id_token;
-        this.queryToServer(id_token);
+        asyncGoogleSignIn(id_token);
       })
       .then(res => console.log('Its okey'))
       .catch(err => console.log('ERROR ', err));
@@ -49,15 +40,9 @@ class GoogleButton extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    userInfo: state.userInfo,
-  };
-};
-
 export default withRouter(
   connect(
-    mapStateToProps,
-    { addUserInfo }
+    null,
+    { asyncGoogleSignIn }
   )(GoogleButton)
 );

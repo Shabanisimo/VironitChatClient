@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Rout, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { addUserInfo } from '../../store/actions/userInfoAction';
-import request from '../../utils/requests';
+import { asyncAuthorization } from '../../store/actions/user';
 import SocialLogin from '../socialLogin/socialLogin';
 import './loginForm.css';
 
@@ -35,13 +34,11 @@ class LoginForm extends Component {
 
   logIn(e) {
     e.preventDefault();
-    const email = this.state.email;
-    const password = this.state.password;
-    request('user/signin', 'POST', { email, password }).then(data => {
-      localStorage.setItem('token', data.token);
-      this.props.addUserInfo(data);
-      this.props.history.push('/chat');
-    });
+
+    const { asyncAuthorization, history } = this.props;
+    const { email, password } = this.state;
+
+    asyncAuthorization(email, password).then(() => history.push('/chat'));
   }
 
   render() {
@@ -78,6 +75,6 @@ class LoginForm extends Component {
 export default withRouter(
   connect(
     null,
-    { addUserInfo }
+    { asyncAuthorization }
   )(LoginForm)
 );

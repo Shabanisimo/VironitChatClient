@@ -48,7 +48,6 @@
   font-size: 16px;
   font-weight: 700;
 }
-
 .chat-form--btn:hover {
   background-color: #006dbf;
   cursor: pointer;
@@ -59,7 +58,6 @@
   -webkit-transition: width 2s, transform 1s;
   transition: width 2s, transform 1s;
 }
-
 .side-menu--list {
   cursor: pointer;
   list-style: none;
@@ -67,37 +65,30 @@
   margin: 0;
   width: 60px;
 }
-
 .side-menu--item {
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 10px;
 }
-
 .side-menu--item:hover {
   background-color: #ffffff;
   color: #1da1f2;
 }
-
 .side-menu--item:hover .side-menu--img > svg {
   fill: #1da1f2;
 }
-
 .side-menu--img > svg {
   width: 40px;
   height: 40px;
   fill: black;
 }
-
 .side-menu--text {
   display: none;
 }
-
 .side-menu.__open .side-menu--list {
   width: 200px;
 }
-
 .side-menu.__open .side-menu--text {
   display: block;
   margin: 0 10px;
@@ -124,7 +115,6 @@
   padding: 7px;
   border-bottom: 1px solid lightgray;
 }
-
 .room-item:hover {
   background-color: antiquewhite;
 }

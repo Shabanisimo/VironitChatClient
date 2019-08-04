@@ -1,5 +1,5 @@
-export function getItemFromStorage(key) {
-  return localStorage.getItem(key);
+export async function getItemFromStorage(key) {
+  return await localStorage.getItem(key);
 }
 
 export async function setItemToStorage(key, token) {

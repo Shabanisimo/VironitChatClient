@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { addUserInfo } from '../../store/actions/userInfoAction';
-import request from '../../utils/requests';
+import { asyncRegistration } from '../../store/actions/user';
 import './registrationForm.scss';
 
 class RegistrationForm extends Component {
@@ -55,16 +54,13 @@ class RegistrationForm extends Component {
 
   onRegister(e) {
     e.preventDefault();
-    request('user/registration', 'POST', {
-      name: this.state.name,
-      surname: this.state.surname,
-      email: this.state.email,
-      password: this.state.password,
-    }).then(data => {
-      localStorage.setItem('token', data.token);
-      this.props.addUserInfo(data);
-      this.props.history.push('/chat');
-    });
+
+    const { asyncRegistration, history } = this.props;
+    const { name, surname, email, password } = this.state;
+
+    asyncRegistration(name, surname, email, password).then(() =>
+      history.push('/chat')
+    );
   }
 
   render() {
@@ -114,6 +110,6 @@ class RegistrationForm extends Component {
 export default withRouter(
   connect(
     null,
-    { addUserInfo }
+    { asyncRegistration }
   )(RegistrationForm)
 );

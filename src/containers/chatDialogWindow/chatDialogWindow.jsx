@@ -17,11 +17,11 @@ class ChatDialogWindow extends Component {
   constructor() {
     super();
 
-    this.onChangeRoom = this.onChangeRoom.bind(this);
+    this.loadUserInfo = this.loadUserInfo.bind(this);
     this.logOut = this.logOut.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     localStorage.getItem('token')
       ? this.loadUserInfo()
       : this.props.history.push('/auth');
@@ -35,12 +35,6 @@ class ChatDialogWindow extends Component {
     addSocket();
   }
 
-  onChangeRoom(id) {
-    const { changeActiveRoom } = this.props;
-
-    changeActiveRoom(id);
-  }
-
   logOut() {
     const { removeRoomList, removeUserInfo } = this.props;
 
@@ -50,14 +44,20 @@ class ChatDialogWindow extends Component {
   }
 
   render() {
-    const { roomList, activeRoom, sendMessage, userId } = this.props;
+    const {
+      roomList,
+      activeRoom,
+      sendMessage,
+      userId,
+      changeActiveRoom,
+    } = this.props;
     return (
       <div className="chat-dialog-window">
         <SideMenu logOut={this.logOut} />
         <RoomList
           roomList={roomList}
           activeRoom={activeRoom}
-          onChangeRoom={this.onChangeRoom}
+          onChangeRoom={changeActiveRoom}
         />
         <div className="chat-block">
           {activeRoom ? (

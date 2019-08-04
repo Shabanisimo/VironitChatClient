@@ -4,7 +4,7 @@ import './userImage.css';
 function UserImage({ src }) {
   return (
     <a className="user-img--block">
-      <img className="user-img" src={this.props.src || ''} alt="" />
+      <img className="user-img" src={src || ''} alt="" />
     </a>
   );
 }

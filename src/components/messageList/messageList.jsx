@@ -3,7 +3,7 @@ import Message from '../message/message';
 
 class MessageList extends Component {
   render() {
-    const { room, userId } = this.ptops;
+    const { room, userId } = this.props;
     const { Users, Messages } = room;
     return (
       <ul className="message--list">
@@ -17,7 +17,7 @@ class MessageList extends Component {
               date={date}
               user={SenderId === userId}
               userInfo={Users[SenderId]}
-              showImage={showImage}
+              showImage={!showImage}
               key={id}
             />
           );

@@ -1,10 +1,10 @@
 const initialState = [];
 
-export default function roomList(state = initialState, action) {
+export default function userList(state = initialState, action) {
   switch (action.type) {
-    case 'UPDATE_ROOMS':
+    case 'LOAD_USERLIST':
       return [...action.payload];
-    case 'DELETE_ROOMS':
+    case 'REMOVE_USERLIST':
       return [];
     default:
       return state;

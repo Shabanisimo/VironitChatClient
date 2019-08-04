@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import messageList from './messageList';
-import userInfo from './userInfo';
-import roomList from './roomList';
+import userInfo from './user';
+import roomList from './room';
+import socket from './socket';
+import userList from './userList';
 
 export default combineReducers({
-  messageList,
   userInfo,
   roomList,
+  socket,
+  userList,
 });

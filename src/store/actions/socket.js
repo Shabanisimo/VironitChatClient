@@ -1,4 +1,3 @@
-import { HOST } from 'react-native-dotenv';
 import io from 'socket.io-client';
 import { getItemFromStorage } from '../../utils/localStorage';
 import { addRoom } from './room';
@@ -23,7 +22,7 @@ export const addSocket = () => (dispatch, getState) => {
   const { socketConnect } = getState().socket;
   if (!socketConnect) {
     getItemFromStorage('token').then(token => {
-      const socket = io.connect(`http://${HOST}:3030`);
+      const socket = io.connect(`http://localhost:3030`);
 
       socket.on('connect', () => {
         socket.emit('conn', { token });

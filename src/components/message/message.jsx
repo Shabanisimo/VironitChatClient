@@ -8,15 +8,24 @@ function Message({
   showImage,
   userInfo: { imgUrl, name },
 }) {
+  const time = new Date(date);
   return (
     <li className="message-item">
-      <div className={user ? 'message-block __user' : 'message-block'}>
-        {showImage && <UserImage src={imgUrl} />}
-        <div className="message-info">
-          <p className="user-name">{name}</p>
+      <div
+        className={
+          user
+            ? 'message-block _user'
+            : showImage
+            ? 'message-block'
+            : 'message-block _without-image'
+        }
+      >
+        {!user && showImage && <UserImage src={imgUrl} />}
+        <div className={user ? 'message-info _user' : 'message-info'}>
+          {!user ? <p className="user-name">{name}</p> : null}
           <p className="message-text">{messageText}</p>
         </div>
-        <p className="message-date">{date}</p>
+        <p className="message-date">{`${time.getUTCHours()}:${time.getUTCMinutes()}`}</p>
       </div>
     </li>
   );

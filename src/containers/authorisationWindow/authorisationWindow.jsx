@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import LoginForm from '../../components/loginForm/loginForm';
-import RegistrationForm from '../../components/registrationForm/registrationForm';
+import LoginForm from '../loginForm/loginForm';
+import RegistrationForm from '../registrationForm/registrationForm';
 import './authorisationWindow.css';
 
 export default class AuthorisationWindow extends Component {
-  componentWillMount() {
-    localStorage.getItem('token') ? this.props.history.push('/chat') : null;
+  componentDidMount() {
+    localStorage.getItem('token') && this.props.history.push('/chat');
   }
 
   render() {

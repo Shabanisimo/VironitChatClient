@@ -4,7 +4,7 @@ import ExitIcon from '../../assets/img/exit.svg';
 import SettingIcon from '../../assets/img/settings.svg';
 import RightArrow from '../../assets/img/right-arrow.svg';
 import SVG from 'react-inlinesvg';
-import CreateRoomFrom from '../createRoomForm/createRoomForm';
+import CreateRoomFrom from '../../containers/createRoomForm/createRoomForm';
 
 export default class SideMenu extends Component {
   constructor() {

@@ -5,12 +5,8 @@ import { connect } from 'react-redux';
 import './chatDialogWindow.css';
 import { withRouter } from 'react-router-dom';
 import Chat from '../../components/chat/chat';
-import { asyncGetUserInfo, removeUserInfo } from '../../store/actions/user';
-import {
-  asyncAddRoomList,
-  changeActiveRoom,
-  removeRoomList,
-} from '../../store/actions/room';
+import { asyncGetUserInfo, logOut } from '../../store/actions/user';
+import { asyncAddRoomList, changeActiveRoom } from '../../store/actions/room';
 import { addSocket, sendMessage } from '../../store/actions/socket';
 
 class ChatDialogWindow extends Component {
@@ -36,10 +32,9 @@ class ChatDialogWindow extends Component {
   }
 
   logOut() {
-    const { removeRoomList, removeUserInfo } = this.props;
+    const { logOut } = this.props;
 
-    removeRoomList();
-    removeUserInfo();
+    logOut();
     this.props.history.push('/auth');
   }
 
@@ -90,10 +85,9 @@ export default withRouter(
     mapStateToProps,
     {
       asyncGetUserInfo,
-      removeUserInfo,
+      logOut,
       asyncAddRoomList,
       changeActiveRoom,
-      removeRoomList,
       addSocket,
       sendMessage,
     }

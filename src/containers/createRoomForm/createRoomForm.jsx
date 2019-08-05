@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import UserList from '../../components/userList/userList';
+import { asyncCreateRoom } from '../../store/actions/room';
+import { asyncLoadUserList } from '../../store/actions/userList';
 import './createRoomForm.css';
-import request from '../../utils/requests';
-import UserList from '../userList/userList';
 
 class CreateRoomForm extends Component {
   constructor() {
@@ -10,14 +11,11 @@ class CreateRoomForm extends Component {
 
     this.state = {
       roomName: '',
-      userList: [],
       selectedUsers: [],
     };
 
     this.onChangeRoomName = this.onChangeRoomName.bind(this);
     this.createRoomQuery = this.createRoomQuery.bind(this);
-    this.onChecked = this.onChecked.bind(this);
-    this.getUserList = this.getUserList.bind(this);
     this.onChecked = this.onChecked.bind(this);
   }
 
@@ -27,23 +25,9 @@ class CreateRoomForm extends Component {
 
   createRoomQuery(e) {
     e.preventDefault();
-    let data = {};
-    data.name = this.state.roomName;
-    data.users = [...this.state.selectedUsers, localStorage.getItem('token')];
-    request('room/createRoom', 'POST', data)
-      .then(data => this.props.onUpdateRoomList(data))
-      .catch(err => console.log(err));
-  }
-
-  getUserList() {
-    request('user/getUserList', 'GET').then(data => {
-      this.setState({
-        userList: [
-          ...data.filter(u => u.token !== localStorage.getItem('token')),
-        ],
-      });
-      console.log(this.state.userList);
-    });
+    const { asyncCreateRoom } = this.props;
+    const { roomName, selectedUsers } = this.state;
+    asyncCreateRoom(roomName, selectedUsers);
   }
 
   onChecked(token) {
@@ -58,11 +42,15 @@ class CreateRoomForm extends Component {
     }
   }
 
-  componentWillMount() {
-    this.getUserList();
+  componentDidMount() {
+    const { asyncLoadUserList } = this.props;
+
+    asyncLoadUserList();
   }
 
   render() {
+    const { roomName, selectedUsers } = this.state;
+
     return (
       <div className="create-room--block">
         <header className="create-room--header">
@@ -72,10 +60,14 @@ class CreateRoomForm extends Component {
           <input
             type="text"
             className="create-room--input"
-            value={this.state.roomName}
+            value={roomName}
             onChange={this.onChangeRoomName}
           />
-          <UserList handler={this.onChecked} userList={this.state.userList} />
+          <UserList
+            selectUser={this.onChecked}
+            userList={this.props.userList}
+            selectedUsers={selectedUsers}
+          />
           <button className="create-room--btn" onClick={this.props.togglePopup}>
             Cancel
           </button>
@@ -88,12 +80,13 @@ class CreateRoomForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    onUpdateRoomList: roomList => {
-      dispatch({ type: 'UPDATE_ROOMS', payload: roomList });
-    },
+    userList: state.userList,
   };
 };
 
-export default connect(mapDispatchToProps)(CreateRoomForm);
+export default connect(
+  mapStateToProps,
+  { asyncLoadUserList, asyncCreateRoom }
+)(CreateRoomForm);

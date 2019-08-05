@@ -24,7 +24,6 @@ export const asyncAddRoomList = () => dispatch => {
   getItemFromStorage('token').then(token => {
     request('room/getList', 'POST', { token })
       .then(data => {
-        console.log(data);
         const roomListObj = {};
         data.forEach(room => {
           roomListObj[room.id] = { ...room };
@@ -34,7 +33,6 @@ export const asyncAddRoomList = () => dispatch => {
           });
           roomListObj[room.id].Users = userListObj;
         });
-        console.log(roomListObj);
         dispatch(addRoomList(roomListObj));
       })
       .catch(err => console.log(err));

@@ -4,6 +4,7 @@ import {
   setItemToStorage,
   removeItemFromStorage,
 } from '../../utils/localStorage';
+import { removeRoomList } from './room';
 
 const addUserInfo = userInfo => ({
   type: 'ADD_INFO',
@@ -17,6 +18,7 @@ export const removeUserInfo = () => ({
 export const logOut = () => dispatch =>
   removeItemFromStorage('token').then(() => {
     dispatch(removeUserInfo());
+    dispatch(removeRoomList());
   });
 
 export const asyncGetUserInfo = () => dispatch => {
@@ -68,7 +70,6 @@ export const updateUserInfo = (name, surname, email) => (
     userInfo: { token, id },
     userInfo,
   } = getState().userInfo;
-  console.log(token);
   return request('user/updateUserInfo', 'PUT', {
     name,
     surname,
@@ -79,6 +80,7 @@ export const updateUserInfo = (name, surname, email) => (
     userInfo.name = name;
     userInfo.surname = surname;
     userInfo.email = email;
+    userInfo.id = id;
     dispatch(addUserInfo(userInfo));
   });
 };

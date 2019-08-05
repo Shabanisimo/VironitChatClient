@@ -10,7 +10,6 @@ export default function withScroll(WrappedComponent) {
 
     componentDidMount() {
       this.myRef.current.scrollIntoView({ block: 'end', behavior: 'smooth' });
-      console.log(this.myRef.current.scrollIntoView());
     }
 
     componentWillUpdate() {
@@ -18,7 +17,6 @@ export default function withScroll(WrappedComponent) {
         block: 'nearest',
         behavior: 'smooth',
       });
-      console.log(this.myRef.current.scrollIntoView());
     }
 
     render() {

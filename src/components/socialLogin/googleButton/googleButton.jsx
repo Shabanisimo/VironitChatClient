@@ -20,7 +20,7 @@ class GoogleButton extends Component {
         const id_token = user.getAuthResponse().id_token;
         asyncGoogleSignIn(id_token);
       })
-      .then(res => console.log('Its okey'))
+      .then(res => this.props.history.push('/chat'))
       .catch(err => console.log('ERROR ', err));
   };
 

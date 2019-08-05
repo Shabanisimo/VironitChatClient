@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Rout, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { asyncAuthorization } from '../../store/actions/user';
-import SocialLogin from '../socialLogin/socialLogin';
+import SocialLogin from '../../components/socialLogin/socialLogin';
 import './loginForm.css';
 
 class LoginForm extends Component {

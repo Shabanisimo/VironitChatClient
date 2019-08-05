@@ -8,13 +8,13 @@ class MessageList extends Component {
     return (
       <ul className="message--list">
         {Messages.map((message, i, messages) => {
-          const { messageText, date, SenderId, id } = message;
+          const { messageText, createdAt, SenderId, id } = message;
           const showImage =
             messages[i + 1] && SenderId === messages[i + 1].SenderId;
           return (
             <Message
               messageText={messageText}
-              date={date}
+              date={createdAt}
               user={SenderId === userId}
               userInfo={Users[SenderId]}
               showImage={!showImage}

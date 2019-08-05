@@ -39,7 +39,14 @@ export default function roomList(state = initialState, action) {
         },
       };
     case 'DELETE_ROOMS':
-      return {};
+      return {
+        roomList: {},
+        activeRoom: {
+          roomId: Number,
+          roomName: '',
+          userList: [],
+        },
+      };
     default:
       return state;
   }

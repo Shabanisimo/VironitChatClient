@@ -6,19 +6,13 @@ import { withRouter } from 'react-router-dom';
 
 class Header extends Component {
   render() {
+    const { imgUrl, name, surname, history } = this.props.userInfo;
     return (
       <header className="header">
-        <a
-          className="header--icon"
-          onClick={() => this.props.history.push('/chat')}
-        >
+        <a className="header--icon" onClick={() => history.push('/chat')}>
           &lt;Noname&#47;&gt;
         </a>
-        <UserItem
-          imgUrl={this.props.userInfo.imgUrl}
-          name={this.props.userInfo.name}
-          surname={this.props.userInfo.surname}
-        />
+        <UserItem imgUrl={imgUrl} name={name} surname={surname} />
       </header>
     );
   }
@@ -26,7 +20,7 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    userInfo: state.userInfo,
+    userInfo: state.userInfo.userInfo,
   };
 };
 

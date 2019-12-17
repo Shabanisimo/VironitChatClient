@@ -1,34 +1,26 @@
 import React from 'react';
-import UserImage from '../userImage/userImage';
+import moment from 'moment';
 
-function Message({
-  messageText,
-  date,
-  user,
-  showImage,
-  userInfo: { imgUrl, name },
-}) {
-  const time = new Date(date);
+export default function Message(props) {
+  const { data, isMine, startsSequence, endsSequence, showTimestamp } = props;
+
+  const friendlyTimestamp = moment(data.timestamp).format('LLLL');
   return (
-    <li className="message-item">
-      <div
-        className={
-          user
-            ? 'message-block _user'
-            : showImage
-            ? 'message-block'
-            : 'message-block _without-image'
-        }
-      >
-        {!user && showImage && <UserImage src={imgUrl} />}
-        <div className={user ? 'message-info _user' : 'message-info'}>
-          {!user ? <p className="user-name">{name}</p> : null}
-          <p className="message-text">{messageText}</p>
+    <div
+      className={[
+        'message-item',
+        `${isMine ? 'mine' : ''}`,
+        `${startsSequence ? 'start' : ''}`,
+        `${endsSequence ? 'end' : ''}`,
+      ].join(' ')}
+    >
+      {showTimestamp && <div className="timestamp">{friendlyTimestamp}</div>}
+
+      <div className="bubble-container">
+        <div className="bubble" title={friendlyTimestamp}>
+          {data.message}
         </div>
-        <p className="message-date">{`${time.getUTCHours()}:${time.getUTCMinutes()}`}</p>
       </div>
-    </li>
+    </div>
   );
 }
-
-export default Message;

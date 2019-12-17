@@ -39,7 +39,7 @@ export const asyncAuthorization = (email, password) => dispatch =>
     return false;
   });
 
-export const asyncGoogleSignIn = token => dispatch =>
+export const asyncGoogleSignIn = async token => dispatch =>
   request('user/signin/google', 'POST', { token })
     .then(data => {
       setItemToStorage('token', data[0].token);

@@ -55,73 +55,74 @@
 }
 
 .message {
-  &--list {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    flex-direction: column;
-    padding: 0;
-    align-items: flex-start;
-    list-style: none;
+  &-list {
+    padding: 10px;
+    padding-bottom: 70px;
   }
 
   &-item {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 5px 5px;
-  }
-
-  &-block {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-
-    &._user {
-      flex-direction: row-reverse;
-    }
-
-    &._without-image {
-      padding-left: 50px;
-    }
-  }
-
-  &-info {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    background-color: #ffffff;
-    max-width: 300px;
-    padding: 10px;
-    border-radius: 5px;
-    margin-left: 10px;
-    margin-right: 5px;
-    word-break: break-all;
-
-    &._user {
-      background-color: #def1fd;
-    }
-
-    & .user-name {
-      margin: 0px;
-      font-size: 15px;
-      font-weight: 700;
-      color: black;
-    }
   }
 
-  &-text {
-    margin: 10px 0 5px 0;
-    font-size: 15px;
-    font-weight: 400;
-    color: black;
-    max-width: 280px;
-  }
-
-  &-date {
+  & .timestamp {
+    display: flex;
+    justify-content: center;
+    color: #999;
+    font-weight: 600;
     font-size: 12px;
-    padding: 0;
+    margin: 10px 0px;
+    text-transform: uppercase;
+  }
+
+  & .bubble-container {
+    font-size: 14px;
+    display: flex;
+  }
+
+  &.mine .bubble-container {
+    justify-content: flex-end;
+  }
+
+  &.start .bubble-container .bubble {
+    /* margin-top: 10px; */
+    border-top-left-radius: 20px;
+  }
+
+  &.end .bubble-container .bubble {
+    border-bottom-left-radius: 20px;
+    /* margin-bottom: 10px; */
+  }
+
+  &.mine.start .bubble-container .bubble {
+    margin-top: 10px;
+    border-top-right-radius: 20px;
+  }
+
+  &.mine.end .bubble-container .bubble {
+    border-bottom-right-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  & .bubble-container .bubble {
+    margin: 1px 0px;
+    background: #f4f4f8;
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 75%;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  &.mine .bubble-container .bubble {
+    background: #007aff;
+    color: white;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
   }
 }
 
@@ -253,5 +254,7 @@
   height: calc(100vh - 130px);
   overflow: scroll;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column-reverse;
   background-color: #dce1e6;
 }

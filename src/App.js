@@ -12,7 +12,7 @@ import AuthorisationWindow from './containers/authorisationWindow/authorisationW
 
 const App = () => (
   <div className="App">
-    <Header />
+    {/*<Header />*/}
     <Switch>
       <Route exact path="/auth" component={AuthorisationWindow} />
       <Route path="/reg" component={AuthorisationWindow} />

@@ -27,11 +27,10 @@ export const asyncAddRoomList = () => dispatch => {
         const roomListObj = {};
         data.forEach(room => {
           roomListObj[room.id] = { ...room };
-          const userListObj = {};
-          room.Users.forEach(user => {
-            userListObj[user.id] = user;
+          roomListObj[room.id].Messages.map(message => {
+            message.text = message.messageText;
+            message.user = message.Sender;
           });
-          roomListObj[room.id].Users = userListObj;
         });
         dispatch(addRoomList(roomListObj));
       })

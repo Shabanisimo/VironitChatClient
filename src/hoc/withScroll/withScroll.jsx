@@ -12,7 +12,7 @@ export default function withScroll(WrappedComponent) {
       this.myRef.current.scrollIntoView({ block: 'end', behavior: 'smooth' });
     }
 
-    componentWillUpdate() {
+    componentDidUpdate() {
       this.myRef.current.scrollIntoView({
         block: 'nearest',
         behavior: 'smooth',
@@ -22,10 +22,10 @@ export default function withScroll(WrappedComponent) {
     render() {
       return (
         <div className="with-scroll-component">
+          <div ref={this.myRef} />
           <div>
             <WrappedComponent {...this.props} />
           </div>
-          <div ref={this.myRef} />
         </div>
       );
     }

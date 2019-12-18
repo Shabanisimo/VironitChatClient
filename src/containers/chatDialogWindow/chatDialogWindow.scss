@@ -1,57 +1,106 @@
-.chat {
-  height: calc(100% - 70px);
+.messenger {
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  background: #eeeef1;
 
-  &-dialog-window {
-    max-width: 1920px;
-    min-width: 320px;
-    width: 100%;
-    height: calc(100vh - 60px);
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
+  grid-template-columns: 350px auto;
+  grid-template-rows: 60px auto 60px;
+  grid-column-gap: 1px;
+  grid-row-gap: 1px;
+}
+
+.container {
+  padding: 10px;
+}
+
+.scrollable {
+  position: relative;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sidebar {
+  background: white;
+  grid-row-start: 1;
+  grid-row-end: span 3;
+}
+
+.content {
+  background: white;
+  grid-row-start: 1;
+  grid-row-end: span 3;
+}
+
+.footer {
+  grid-column-start: 2;
+  background: white;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+
+  background-color: white;
+  font-weight: 500;
+  border-bottom: 1px solid #eeeef1;
+
+  position: sticky;
+  top: 0px;
+
+  &-button {
+    color: #007aff;
+    font-size: 28px;
+    transition: all 0.1s;
   }
 
-  &-block {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  &-button:hover {
+    cursor: pointer;
+    color: #0063ce;
   }
 
-  &-form {
-    display: flex;
-    padding: 10px;
-
-    &--block {
-      width: 100%;
-      background-color: lightgray;
-    }
-
-    &--input {
-      max-width: 1720px;
-      width: 100%;
-      max-height: 50px;
-      font-size: 16px;
-      line-height: 21px;
-      text-indent: 5px;
-      font-family: Roboto;
-      resize: none;
-    }
-
-    &--btn {
-      background-color: #1da1f2;
-      color: #ffffff;
-      border: none;
-      height: 50px;
-      min-width: 130px;
-      font-size: 16px;
-      font-weight: 700;
-
-      &:hover {
-        background-color: #006dbf;
-        cursor: pointer;
-      }
-    }
+  &-button:active {
+    color: #007aff;
+    opacity: 0.25;
   }
+}
+
+@supports (backdrop-filter: blur(20px)) {
+  .toolbar {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+  }
+}
+
+.toolbar-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.left-items,
+.right-items {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+}
+
+.right-items {
+  flex-direction: row-reverse;
+}
+
+.left-items .toolbar-button {
+  margin-right: 20px;
+}
+
+.right-items .toolbar-button {
+  margin-left: 20px;
+}
+
+.left-items .toolbar-button:last-child,
+.right-items .toolbar-button:last-child {
+  margin: 0;
 }
 
 .message {
@@ -63,67 +112,126 @@
   &-item {
     display: flex;
     flex-direction: column;
-  }
 
-  & .timestamp {
-    display: flex;
-    justify-content: center;
-    color: #999;
-    font-weight: 600;
-    font-size: 12px;
-    margin: 10px 0px;
-    text-transform: uppercase;
-  }
+    & .timestamp {
+      display: flex;
+      justify-content: center;
+      color: #999;
+      font-weight: 600;
+      font-size: 12px;
+      margin: 10px 0px;
+      text-transform: uppercase;
+    }
 
-  & .bubble-container {
-    font-size: 14px;
-    display: flex;
-  }
+    & .bubble-container {
+      font-size: 14px;
+      display: flex;
+    }
 
-  &.mine .bubble-container {
-    justify-content: flex-end;
-  }
+    &.mine .bubble-container {
+      justify-content: flex-end;
+    }
 
-  &.start .bubble-container .bubble {
-    /* margin-top: 10px; */
-    border-top-left-radius: 20px;
-  }
+    &.start .bubble-container .bubble {
+      /* margin-top: 10px; */
+      border-top-left-radius: 20px;
+    }
 
-  &.end .bubble-container .bubble {
-    border-bottom-left-radius: 20px;
-    /* margin-bottom: 10px; */
-  }
+    &.end .bubble-container .bubble {
+      border-bottom-left-radius: 20px;
+      /* margin-bottom: 10px; */
+    }
 
-  &.mine.start .bubble-container .bubble {
-    margin-top: 10px;
-    border-top-right-radius: 20px;
-  }
+    &.mine.start .bubble-container .bubble {
+      margin-top: 10px;
+      border-top-right-radius: 20px;
+    }
 
-  &.mine.end .bubble-container .bubble {
-    border-bottom-right-radius: 20px;
-    margin-bottom: 10px;
-  }
+    &.mine.end .bubble-container .bubble {
+      border-bottom-right-radius: 20px;
+      margin-bottom: 10px;
+    }
 
-  & .bubble-container .bubble {
-    margin: 1px 0px;
-    background: #f4f4f8;
-    padding: 10px 15px;
-    border-radius: 20px;
-    max-width: 75%;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-  }
+    & .bubble-container .bubble {
+      margin: 1px 0px;
+      background: #f4f4f8;
+      padding: 10px 15px;
+      border-radius: 20px;
+      max-width: 75%;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
 
-  &.mine .bubble-container .bubble {
-    background: #007aff;
-    color: white;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
+    &.mine .bubble-container .bubble {
+      background: #007aff;
+      color: white;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
   }
+}
+
+.conversation-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.conversation-list-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.conversation-list-item:hover {
+  background: #eeeef1;
+  cursor: pointer;
+}
+
+.conversation-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.conversation-title {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.conversation-snippet {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+.conversation-search {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.conversation-search-input {
+  background: #f4f4f8;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+}
+
+.conversation-search-input::placeholder {
+  text-align: center;
+}
+
+.conversation-search-input:focus::placeholder {
+  text-align: left;
 }
 
 .side-menu {

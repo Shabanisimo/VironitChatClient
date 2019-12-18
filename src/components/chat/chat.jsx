@@ -9,8 +9,8 @@ export default class Chat extends Component {
   render() {
     const { onSendMessage, room, userId } = this.props;
     return (
-      <div className="chat">
-        <MessageListWithScroll
+      <div>
+        <MessageList
           className="chat-message-list"
           room={room}
           userId={userId}

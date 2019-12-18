@@ -3,7 +3,6 @@ import moment from 'moment';
 
 export default function Message(props) {
   const { data, isMine, startsSequence, endsSequence, showTimestamp } = props;
-
   const friendlyTimestamp = moment(data.timestamp).format('LLLL');
   return (
     <div
@@ -18,7 +17,7 @@ export default function Message(props) {
 
       <div className="bubble-container">
         <div className="bubble" title={friendlyTimestamp}>
-          {data.message}
+          {data.messageText}
         </div>
       </div>
     </div>

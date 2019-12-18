@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ToolbarButton from '../ToolbarButton';
+import Compose from '../compose/compose';
 
 class ChatForm extends Component {
   constructor(props) {
@@ -29,18 +31,20 @@ class ChatForm extends Component {
 
   render() {
     return (
-      <div className="chat-form--block">
-        <form onSubmit={this.handleFormSubmit} className="chat-form">
-          <textarea
-            ref="message"
-            className="chat-form--input"
-            onChange={this.onChangeMessageText}
-            value={this.state.messageText}
-          />
-          <button className="chat-form--btn" onClick={this.onSend}>
-            Send message
-          </button>
-        </form>
+      <div>
+        <Compose
+          onChange={this.onChangeMessageText}
+          onSend={this.onSend}
+          value={this.state.messageText}
+          rightItems={[
+            <ToolbarButton key="photo" icon="ion-ios-camera" />,
+            <ToolbarButton key="image" icon="ion-ios-image" />,
+            <ToolbarButton key="audio" icon="ion-ios-mic" />,
+            <ToolbarButton key="money" icon="ion-ios-card" />,
+            <ToolbarButton key="games" icon="ion-logo-game-controller-b" />,
+            <ToolbarButton key="emoji" icon="ion-ios-happy" />,
+          ]}
+        />
       </div>
     );
   }

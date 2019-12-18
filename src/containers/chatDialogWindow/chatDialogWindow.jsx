@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RoomList from '../../components/roomList/roomList';
 import SideMenu from '../../components/sideMenu/sideMenu';
+import ChatHeader from '../../components/chatHeader/chatHeader';
 import { connect } from 'react-redux';
 import './chatDialogWindow.css';
 import { withRouter } from 'react-router-dom';
@@ -47,19 +48,24 @@ class ChatDialogWindow extends Component {
       changeActiveRoom,
     } = this.props;
     return (
-      <div className="chat-dialog-window">
-        <SideMenu logOut={this.logOut} />
-        <RoomList
-          roomList={roomList}
-          activeRoom={activeRoom}
-          onChangeRoom={changeActiveRoom}
-        />
-        <div className="chat-block">
-          {activeRoom ? (
+      <div className="messenger">
+        {/*<SideMenu logOut={this.logOut} />*/}
+        <div className="scrollable sidebar">
+          <RoomList
+            roomList={roomList}
+            activeRoom={activeRoom.roomId}
+            onChangeRoom={changeActiveRoom}
+          />
+        </div>
+        <div className="scrollable content">
+          <ChatHeader
+            chatTitle={activeRoom.roomId && roomList[activeRoom.roomId].name}
+          />
+          {activeRoom.roomId ? (
             <Chat
               onSendMessage={sendMessage}
               userId={userId}
-              room={roomList[activeRoom]}
+              room={roomList[activeRoom.roomId]}
             />
           ) : (
             <div>
@@ -76,20 +82,17 @@ const mapStateToProps = state => {
   return {
     userId: state.userInfo.userInfo.id,
     roomList: state.roomList.roomList,
-    activeRoom: state.roomList.activeRoom.roomId,
+    activeRoom: state.roomList.activeRoom,
   };
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    {
-      asyncGetUserInfo,
-      logOut,
-      asyncAddRoomList,
-      changeActiveRoom,
-      addSocket,
-      sendMessage,
-    }
-  )(ChatDialogWindow)
+  connect(mapStateToProps, {
+    asyncGetUserInfo,
+    logOut,
+    asyncAddRoomList,
+    changeActiveRoom,
+    addSocket,
+    sendMessage,
+  })(ChatDialogWindow)
 );

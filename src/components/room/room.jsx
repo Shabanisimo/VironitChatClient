@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import shave from 'shave';
 import RoomImage from '../roomImage/roomImage';
 
-function Room({ id, onChangeRoom, image, name, activeRoom, lastMessage }) {
+export default function Room(props) {
+  useEffect(() => {
+    shave('.conversation-snippet', 20);
+  });
+
+  const { image, name, activeRoom, lastMessage, onChangeRoom, id } = props;
+
   return (
-    <li
-      className={activeRoom ? 'room-item _selected' : 'room-item'}
-      onClick={() => onChangeRoom(id)}
-    >
+    <div className="conversation-list-item" onClick={() => onChangeRoom(id)}>
       <RoomImage image={image} alt={name} />
-      <div className="room-info">
-        <p className="room-name">{name}</p>
-        <p className="room-last-message">{lastMessage}</p>
+      <div className="conversation-info">
+        <h1 className="conversation-title">{name}</h1>
+        <p className="conversation-snippet">{lastMessage}</p>
       </div>
-    </li>
+    </div>
   );
 }
-
-export default Room;

@@ -1,5 +1,4 @@
 import React from 'react';
-import './toolbar.css';
 
 export default function Toolbar(props) {
   const { title, leftItems, rightItems } = props;

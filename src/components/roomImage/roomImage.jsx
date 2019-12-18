@@ -6,8 +6,9 @@ function RoomImage({ image, name }) {
       <img
         className="room-image"
         src={
-          image ||
-          'https://cdn3.iconfinder.com/data/icons/e-commerce-8/91/group-512.png'
+          image
+            ? image
+            : 'https://cdn3.iconfinder.com/data/icons/e-commerce-8/91/group-512.png'
         }
         alt={name}
       />

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import UserList from '../../components/userList/userList';
 import { asyncCreateRoom } from '../../store/actions/room';
 import { asyncLoadUserList } from '../../store/actions/userList';
+import { switchPopup } from '../../store/actions/interface';
 import './createRoomForm.css';
 
 class CreateRoomForm extends Component {
@@ -50,6 +51,7 @@ class CreateRoomForm extends Component {
 
   render() {
     const { roomName, selectedUsers } = this.state;
+    const { switchPopup, userList } = this.props;
 
     return (
       <div className="create-room--block">
@@ -65,10 +67,10 @@ class CreateRoomForm extends Component {
           />
           <UserList
             selectUser={this.onChecked}
-            userList={this.props.userList}
+            userList={userList}
             selectedUsers={selectedUsers}
           />
-          <button className="create-room--btn" onClick={this.props.togglePopup}>
+          <button className="create-room--btn" onClick={switchPopup}>
             Cancel
           </button>
           <button className="create-room--btn" onClick={this.createRoomQuery}>
@@ -86,7 +88,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { asyncLoadUserList, asyncCreateRoom }
-)(CreateRoomForm);
+export default connect(mapStateToProps, {
+  asyncLoadUserList,
+  asyncCreateRoom,
+  switchPopup,
+})(CreateRoomForm);

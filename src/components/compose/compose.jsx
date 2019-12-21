@@ -1,5 +1,4 @@
 import React from 'react';
-import './compose.css';
 
 export default function Compose(props) {
   const { onChange, value, onSend } = props;

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import RoomList from '../../components/roomList/roomList';
-import SideMenu from '../../components/sideMenu/sideMenu';
 import ChatHeader from '../../components/chatHeader/chatHeader';
 import { connect } from 'react-redux';
 import './chatDialogWindow.css';
 import { withRouter } from 'react-router-dom';
 import Chat from '../../components/chat/chat';
-import { asyncGetUserInfo, logOut } from '../../store/actions/user';
+import { asyncGetUserInfo } from '../../store/actions/user';
 import { asyncAddRoomList, changeActiveRoom } from '../../store/actions/room';
 import { addSocket, sendMessage } from '../../store/actions/socket';
+import CreateRoomFrom from '../../containers/createRoomForm/createRoomForm';
+import SettingsForm from '../../containers/settingsForm/settingsForm';
 
 class ChatDialogWindow extends Component {
   constructor() {
@@ -46,10 +47,11 @@ class ChatDialogWindow extends Component {
       sendMessage,
       userId,
       changeActiveRoom,
+      popupState,
+      settingsPopupState,
     } = this.props;
     return (
       <div className="messenger">
-        {/*<SideMenu logOut={this.logOut} />*/}
         <div className="scrollable sidebar">
           <RoomList
             roomList={roomList}
@@ -68,11 +70,13 @@ class ChatDialogWindow extends Component {
               room={roomList[activeRoom.roomId]}
             />
           ) : (
-            <div>
+            <div className="disabledChat">
               <p>Выберите комнату или создайте новую</p>
             </div>
           )}
         </div>
+        {popupState && <CreateRoomFrom />}
+        {settingsPopupState && <SettingsForm />}
       </div>
     );
   }
@@ -83,13 +87,14 @@ const mapStateToProps = state => {
     userId: state.userInfo.userInfo.id,
     roomList: state.roomList.roomList,
     activeRoom: state.roomList.activeRoom,
+    popupState: state.appInterface.popup,
+    settingsPopupState: state.appInterface.settingsPopupState,
   };
 };
 
 export default withRouter(
   connect(mapStateToProps, {
     asyncGetUserInfo,
-    logOut,
     asyncAddRoomList,
     changeActiveRoom,
     addSocket,

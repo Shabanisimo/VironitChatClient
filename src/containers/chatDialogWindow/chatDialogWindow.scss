@@ -358,8 +358,15 @@
   object-fit: cover;
 }
 
+.disabledChat {
+  height: calc(100% - 50px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .with-scroll-component {
-  height: calc(100vh - 130px);
+  height: calc(100% - 50px);
   overflow: scroll;
   overflow-x: hidden;
   display: flex;

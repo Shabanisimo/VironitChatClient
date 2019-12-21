@@ -2,11 +2,23 @@ import React from 'react';
 import Room from '../room/room';
 import RoomSearch from '../RoomSearch/RoomSearch';
 import Toolbar from '../toolbar';
+import { connect } from 'react-redux';
+import {
+  switchPopup,
+  switchSettingsPopup,
+} from '../../store/actions/interface';
 import ToolbarButton from '../ToolbarButton';
 
 function RoomList(props) {
-  const { roomList, onChangeRoom, activeRoom } = props;
+  const {
+    roomList,
+    onChangeRoom,
+    activeRoom,
+    switchPopup,
+    switchSettingsPopup,
+  } = props;
   const roomKeys = Object.keys(roomList);
+
   return (
     <div className="conversation-list">
       <Toolbar
@@ -15,6 +27,8 @@ function RoomList(props) {
         rightItems={[
           <ToolbarButton key="add" icon="ion-ios-add-circle-outline" />,
         ]}
+        leftItemHandler={() => switchSettingsPopup()}
+        rightItemHandler={() => switchPopup()}
       />
       <RoomSearch />
       {roomKeys.map(roomKey => {
@@ -40,4 +54,4 @@ function RoomList(props) {
   );
 }
 
-export default RoomList;
+export default connect(null, { switchPopup, switchSettingsPopup })(RoomList);

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import RoomList from '../../components/roomList/roomList';
-import ChatHeader from '../../components/chatHeader/chatHeader';
 import { connect } from 'react-redux';
 import './chatDialogWindow.css';
 import { withRouter } from 'react-router-dom';
@@ -60,14 +59,12 @@ class ChatDialogWindow extends Component {
           />
         </div>
         <div className="scrollable content">
-          <ChatHeader
-            chatTitle={activeRoom.roomId && roomList[activeRoom.roomId].name}
-          />
           {activeRoom.roomId ? (
             <Chat
               onSendMessage={sendMessage}
               userId={userId}
               room={roomList[activeRoom.roomId]}
+              roomName={roomList[activeRoom.roomId].name}
             />
           ) : (
             <div className="disabledChat">
@@ -88,7 +85,7 @@ const mapStateToProps = state => {
     roomList: state.roomList.roomList,
     activeRoom: state.roomList.activeRoom,
     popupState: state.appInterface.popup,
-    settingsPopupState: state.appInterface.settingsPopupState,
+    settingsPopupState: state.appInterface.settingsPopup,
   };
 };
 

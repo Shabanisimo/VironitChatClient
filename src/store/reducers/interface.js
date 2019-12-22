@@ -9,10 +9,12 @@ export default function appInterface(state = initialState, action) {
       return {
         ...state,
         popup: !state.popup,
+        settingsPopup: false,
       };
     case 'SWITCH_SETTINGS_POPUP':
       return {
         ...state,
+        popup: false,
         settingsPopup: !state.settingsPopup,
       };
     default:

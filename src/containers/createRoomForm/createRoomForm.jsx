@@ -26,9 +26,11 @@ class CreateRoomForm extends Component {
 
   createRoomQuery(e) {
     e.preventDefault();
-    const { asyncCreateRoom } = this.props;
+    const { asyncCreateRoom, switchPopup } = this.props;
     const { roomName, selectedUsers } = this.state;
-    asyncCreateRoom(roomName, selectedUsers);
+    asyncCreateRoom(roomName, selectedUsers).then(() => {
+      switchPopup();
+    });
   }
 
   onChecked(token) {

@@ -18,6 +18,15 @@ function RoomList(props) {
     switchSettingsPopup,
   } = props;
   const roomKeys = Object.keys(roomList);
+  const rooms = roomKeys.map(key => {
+    return roomList[key];
+  });
+  rooms.sort((a, b) => {
+    const lastUpadateA =
+      a.Messages.length > 0 ? a.Messages.createdAt : a.createdAt;
+    const lastUpadateB =
+      b.Messages.length > 0 ? b.Messages.createdAt : b.createdAt;
+  });
 
   return (
     <div className="conversation-list">
@@ -31,20 +40,35 @@ function RoomList(props) {
         rightItemHandler={() => switchPopup()}
       />
       <RoomSearch />
-      {roomKeys.map(roomKey => {
+      {/*{roomKeys.map(roomKey => {*/}
+      {/*  const lastMessage =*/}
+      {/*    roomList[roomKey].Messages.length > 0*/}
+      {/*      ? roomList[roomKey].Messages[roomList[roomKey].Messages.length - 1].messageText*/}
+      {/*      : null;*/}
+      {/*  return (*/}
+      {/*    <Room*/}
+      {/*      activeRoom={roomList[roomKey].id === activeRoom}*/}
+      {/*      image={roomList[roomKey].imgUrl}*/}
+      {/*      name={roomList[roomKey].name}*/}
+      {/*      key={roomList[roomKey].token}*/}
+      {/*      id={roomList[roomKey].id}*/}
+      {/*      lastMessage={lastMessage ? lastMessage : null}*/}
+      {/*      onChangeRoom={onChangeRoom}*/}
+      {/*    />*/}
+      {/*  );*/}
+      {/*})}*/}
+      {rooms.map(room => {
         const lastMessage =
-          roomList[roomKey].Messages.length > 0
-            ? roomList[roomKey].Messages[roomList[roomKey].Messages.length - 1]
-                .messageText
+          room.Messages.length > 0
+            ? room.Messages[room.Messages.length - 1].messageText
             : null;
-
         return (
           <Room
-            activeRoom={roomList[roomKey].id === activeRoom}
-            image={roomList[roomKey].imgUrl}
-            name={roomList[roomKey].name}
-            key={roomList[roomKey].token}
-            id={roomList[roomKey].id}
+            activeRoom={room.id === activeRoom}
+            image={room.imgUrl}
+            name={room.name}
+            key={room.token}
+            id={room.id}
             lastMessage={lastMessage ? lastMessage : null}
             onChangeRoom={onChangeRoom}
           />

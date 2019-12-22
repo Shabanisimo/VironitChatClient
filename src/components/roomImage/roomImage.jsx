@@ -4,7 +4,7 @@ function RoomImage({ image, name }) {
   return (
     <div>
       <img
-        className="room-image"
+        className="conversation-photo"
         src={
           image
             ? image

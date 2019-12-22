@@ -5,10 +5,6 @@ import { GoogleLogin } from 'react-google-login';
 import { asyncGoogleSignIn } from '../../../store/actions/user';
 
 class GoogleButton extends Component {
-  componentDidMount() {
-    console.log(process.env.REACT_APP_GOOGLE_KEY);
-  }
-
   onSignIn = data => {
     asyncGoogleSignIn(data.Zi.id_token)
       .then(() => this.props.history.push('/chat'))

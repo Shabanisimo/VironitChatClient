@@ -22,7 +22,7 @@ export const addSocket = () => (dispatch, getState) => {
   const { socketConnect } = getState().socket;
   if (!socketConnect) {
     getItemFromStorage('token').then(token => {
-      const socket = io.connect(`http://localhost:4050`);
+      const socket = io.connect(`http://localhost:3060`);
 
       socket.on('connect', () => {
         socket.emit('conn', { token });

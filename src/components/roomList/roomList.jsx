@@ -22,10 +22,13 @@ function RoomList(props) {
     return roomList[key];
   });
   rooms.sort((a, b) => {
-    const lastUpadateA =
-      a.Messages.length > 0 ? a.Messages.createdAt : a.createdAt;
-    const lastUpadateB =
-      b.Messages.length > 0 ? b.Messages.createdAt : b.createdAt;
+    const lastUpadateA = new Date(
+      a.Messages.length > 0 ? a.Messages.createdAt : a.createdAt
+    );
+    const lastUpadateB = new Date(
+      b.Messages.length > 0 ? b.Messages.createdAt : b.createdAt
+    );
+    return lastUpadateA - lastUpadateB;
   });
 
   return (

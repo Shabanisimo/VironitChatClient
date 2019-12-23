@@ -42,7 +42,7 @@ export default function roomList(state = initialState, action) {
       return {
         roomList: {},
         activeRoom: {
-          roomId: Number,
+          roomId: undefined,
           roomName: '',
           userList: [],
         },

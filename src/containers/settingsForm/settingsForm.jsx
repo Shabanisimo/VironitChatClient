@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { logOut } from '../../store/actions/user';
 import { switchSettingsPopup } from '../../store/actions/interface';
 import SVG from 'react-inlinesvg';
 import ExitIcon from '../../assets/img/exit.svg';
@@ -11,25 +10,30 @@ const SettingsForm = props => {
   const { switchSettingsPopup, logOut } = props;
 
   return (
-    <div className="create-room--block">
-      <header className="create-room--header">
-        <h3 className="create-room--title">Settings Room</h3>
-      </header>
-      <ul className="side-menu--list">
-        <li className="side-menu--item">
-          <SVG src={SettingIcon} className="side-menu--img" />
-          <p className="side-menu--text">Settings</p>
-        </li>
-        <li className="side-menu--item" onClick={() => logOut()}>
-          <SVG src={ExitIcon} className="side-menu--img" />
-          <p className="side-menu--text">Log Out</p>
-        </li>
-      </ul>
-      <div>
-        <button className="create-room--btn" onClick={switchSettingsPopup}>
-          Cancel
-        </button>
-        <button className="create-room--btn">Save</button>
+    <div className="settings-form">
+      <div className="settings-form--inner">
+        <header className="settings-form--header">
+          <h3 className="settings-form--title">Settings Room</h3>
+        </header>
+        <ul className="settings-form--list">
+          <li className="settings-form--item">
+            <SVG src={SettingIcon} className="settings-form--img" />
+            <p className="settings-form--text">Settings</p>
+          </li>
+          <li className="settings-form--item" onClick={() => logOut()}>
+            <SVG src={ExitIcon} className="settings-form--img" />
+            <p className="settings-form--text">Log Out</p>
+          </li>
+        </ul>
+        <div>
+          <button
+            className="settings-form--btn"
+            onClick={() => switchSettingsPopup()}
+          >
+            Cancel
+          </button>
+          <button className="settings-form--btn">Save</button>
+        </div>
       </div>
     </div>
   );
@@ -37,5 +41,4 @@ const SettingsForm = props => {
 
 export default connect(null, {
   switchSettingsPopup,
-  logOut,
 })(SettingsForm);

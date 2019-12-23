@@ -1,14 +1,27 @@
-.create-room {
-  &--block {
-    box-sizing: border-box;
-    position: absolute;
+.settings-form {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.6);
+
+  @supports (backdrop-filter: blur(10px)) {
+    & {
+      background-color: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+    }
+  }
+
+  &--inner {
     width: 500px;
-    height: 600px;
     left: 25%;
     right: 25%;
     top: 25%;
     bottom: 25%;
-    margin: auto;
+    padding: 20px;
     border: 1px solid lightgray;
     border-radius: 5px;
     background: white;
@@ -20,7 +33,6 @@
     font-size: 32px;
     font-family: Roboto;
     font-weight: 900;
-    padding: 5px 0;
   }
 
   &--title {
@@ -29,7 +41,25 @@
 
   &--form {
     padding: 10px;
-    height: 100%;
+  }
+
+  &--list {
+    list-style: none;
+  }
+
+  &--item {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    cursor: pointer;
+  }
+
+  &--img {
+    width: 50px;
+  }
+
+  &--text {
+    margin-left: 15px;
   }
 
   &--input {
@@ -76,11 +106,11 @@
       cursor: pointer;
 
       &._selected {
-        background-color: #1da1f2;
+        background-color: #eeeef1;
       }
 
       &:hover {
-        background-color: #1da1f2;
+        background-color: #eeeef1;
       }
     }
 

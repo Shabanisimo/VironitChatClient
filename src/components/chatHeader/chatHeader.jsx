@@ -1,18 +1,19 @@
 import Toolbar from '../toolbar';
 import ToolbarButton from '../ToolbarButton';
 import React from 'react';
+import { connect } from 'react-redux';
+import { switchRoomSettingsPopup } from '../../store/actions/interface';
 
-const ChatHeader = ({ chatTitle }) => {
+const ChatHeader = ({ chatTitle, switchRoomSettingsPopup }) => {
   return (
     <Toolbar
       title={chatTitle}
+      rightItemHandler={switchRoomSettingsPopup}
       rightItems={[
         <ToolbarButton key="info" icon="ion-ios-information-circle-outline" />,
-        <ToolbarButton key="video" icon="ion-ios-videocam" />,
-        <ToolbarButton key="phone" icon="ion-ios-call" />,
       ]}
     />
   );
 };
 
-export default ChatHeader;
+export default connect(null, { switchRoomSettingsPopup })(ChatHeader);

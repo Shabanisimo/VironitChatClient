@@ -8,6 +8,7 @@ import {
   switchSettingsPopup,
 } from '../../store/actions/interface';
 import ToolbarButton from '../ToolbarButton';
+import moment from 'moment';
 
 function RoomList(props) {
   const {
@@ -22,13 +23,17 @@ function RoomList(props) {
     return roomList[key];
   });
   rooms.sort((a, b) => {
-    const lastUpadateA = new Date(
-      a.Messages.length > 0 ? a.Messages.createdAt : a.createdAt
+    const lastUpadateA = moment(
+      a.Messages.length > 0
+        ? a.Messages[a.Messages.length - 1].createdAt
+        : a.createdAt
     );
-    const lastUpadateB = new Date(
-      b.Messages.length > 0 ? b.Messages.createdAt : b.createdAt
+    const lastUpadateB = moment(
+      b.Messages.length > 0
+        ? b.Messages[b.Messages.length - 1].createdAt
+        : b.createdAt
     );
-    return lastUpadateA - lastUpadateB;
+    return lastUpadateB - lastUpadateA;
   });
 
   return (
@@ -43,23 +48,6 @@ function RoomList(props) {
         rightItemHandler={() => switchPopup()}
       />
       <RoomSearch />
-      {/*{roomKeys.map(roomKey => {*/}
-      {/*  const lastMessage =*/}
-      {/*    roomList[roomKey].Messages.length > 0*/}
-      {/*      ? roomList[roomKey].Messages[roomList[roomKey].Messages.length - 1].messageText*/}
-      {/*      : null;*/}
-      {/*  return (*/}
-      {/*    <Room*/}
-      {/*      activeRoom={roomList[roomKey].id === activeRoom}*/}
-      {/*      image={roomList[roomKey].imgUrl}*/}
-      {/*      name={roomList[roomKey].name}*/}
-      {/*      key={roomList[roomKey].token}*/}
-      {/*      id={roomList[roomKey].id}*/}
-      {/*      lastMessage={lastMessage ? lastMessage : null}*/}
-      {/*      onChangeRoom={onChangeRoom}*/}
-      {/*    />*/}
-      {/*  );*/}
-      {/*})}*/}
       {rooms.map(room => {
         const lastMessage =
           room.Messages.length > 0

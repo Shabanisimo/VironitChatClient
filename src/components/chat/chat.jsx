@@ -18,6 +18,7 @@ const Chat = props => {
         userId={userId}
       />
       <ChatForm
+        activeRoom={room}
         onSendMessage={onSendMessage}
         rightItems={[
           <ToolbarButton key="photo" icon="ion-ios-camera" />,

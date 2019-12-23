@@ -21,6 +21,18 @@ class ChatForm extends Component {
     });
   }
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    const {
+      activeRoom: { id },
+    } = this.props;
+    if (nextProps.activeRoom.id !== id) {
+      this.setState({
+        messageText: '',
+      });
+    }
+    return true;
+  }
+
   onSend(e) {
     e.preventDefault();
     this.props.onSendMessage(this.state.messageText);

@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import './chatDialogWindow.css';
 import { withRouter } from 'react-router-dom';
 import Chat from '../../components/chat/chat';
-import { asyncGetUserInfo } from '../../store/actions/user';
+import { asyncGetUserInfo, logOut } from '../../store/actions/user';
 import { asyncAddRoomList, changeActiveRoom } from '../../store/actions/room';
 import { addSocket, sendMessage } from '../../store/actions/socket';
 import CreateRoomFrom from '../../containers/createRoomForm/createRoomForm';
 import SettingsForm from '../../containers/settingsForm/settingsForm';
+import RoomSettingsForm from '../roomSettingsPopup/roomSettingsForm';
 
 class ChatDialogWindow extends Component {
   constructor() {
@@ -48,6 +49,7 @@ class ChatDialogWindow extends Component {
       changeActiveRoom,
       popupState,
       settingsPopupState,
+      roomSettingsPopupState,
     } = this.props;
     return (
       <div className="messenger">
@@ -73,7 +75,10 @@ class ChatDialogWindow extends Component {
           )}
         </div>
         {popupState && <CreateRoomFrom />}
-        {settingsPopupState && <SettingsForm />}
+        {settingsPopupState && <SettingsForm logOut={() => this.logOut()} />}
+        {roomSettingsPopupState && activeRoom.roomId && (
+          <RoomSettingsForm userList={roomList[activeRoom.roomId].Users} />
+        )}
       </div>
     );
   }
@@ -86,6 +91,7 @@ const mapStateToProps = state => {
     activeRoom: state.roomList.activeRoom,
     popupState: state.appInterface.popup,
     settingsPopupState: state.appInterface.settingsPopup,
+    roomSettingsPopupState: state.appInterface.roomSettingsPopup,
   };
 };
 
@@ -96,5 +102,6 @@ export default withRouter(
     changeActiveRoom,
     addSocket,
     sendMessage,
+    logOut,
   })(ChatDialogWindow)
 );

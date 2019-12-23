@@ -11,8 +11,8 @@ export default class SocialLogin extends Component {
         <p className="social-login--text">Sign in with:</p>
         <ul className="social-login--list">
           <GoogleButton />
-          <FacebookButton />
-          <TwitterButton />
+          {/*<FacebookButton />*/}
+          {/*<TwitterButton />*/}
         </ul>
       </div>
     );

@@ -56,30 +56,33 @@ class CreateRoomForm extends Component {
     const { switchPopup, userList } = this.props;
 
     return (
-      <div className="create-room--block">
-        <header className="create-room--header">
-          <h3 className="create-room--title">Create Room</h3>
-        </header>
-        <form className="create-room--form">
-          <input
-            type="text"
-            className="create-room--input"
-            value={roomName}
-            onChange={this.onChangeRoomName}
-          />
-          <UserList
-            selectUser={this.onChecked}
-            userList={userList}
-            selectedUsers={selectedUsers}
-          />
-          <button className="create-room--btn" onClick={switchPopup}>
-            Cancel
-          </button>
-          <button className="create-room--btn" onClick={this.createRoomQuery}>
-            Create
-          </button>
-        </form>
-      </div>
+      <dialog className="create-room">
+        <div className="create-room--inner">
+          <header className="create-room--header">
+            <h3 className="create-room--title">Create Room</h3>
+          </header>
+          <form className="create-room--form">
+            <input
+              type="text"
+              placeholder="Enter chat name"
+              className="create-room--input"
+              value={roomName}
+              onChange={this.onChangeRoomName}
+            />
+            <UserList
+              selectUser={this.onChecked}
+              userList={userList}
+              selectedUsers={selectedUsers}
+            />
+            <button className="create-room--btn" onClick={switchPopup}>
+              Cancel
+            </button>
+            <button className="create-room--btn" onClick={this.createRoomQuery}>
+              Create
+            </button>
+          </form>
+        </div>
+      </dialog>
     );
   }
 }

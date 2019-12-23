@@ -1,6 +1,7 @@
 import io from 'socket.io-client';
 import { getItemFromStorage } from '../../utils/localStorage';
 import { addRoom } from './room';
+import user from '../reducers/user';
 
 export const saveSocket = socket => ({
   type: 'ADD_SOCKET',
@@ -22,7 +23,7 @@ export const addSocket = () => (dispatch, getState) => {
   const { socketConnect } = getState().socket;
   if (!socketConnect) {
     getItemFromStorage('token').then(token => {
-      const socket = io.connect(`http://localhost:3060`);
+      const socket = io.connect(`http://localhost:4050`);
 
       socket.on('connect', () => {
         socket.emit('conn', { token });

@@ -5,6 +5,7 @@ import {
   removeItemFromStorage,
 } from '../../utils/localStorage';
 import { removeRoomList } from './room';
+import { disablePopups } from './interface';
 
 const addUserInfo = userInfo => ({
   type: 'ADD_INFO',
@@ -19,6 +20,7 @@ export const logOut = () => dispatch =>
   removeItemFromStorage('token').then(() => {
     dispatch(removeUserInfo());
     dispatch(removeRoomList());
+    dispatch(disablePopups());
   });
 
 export const asyncGetUserInfo = () => dispatch => {

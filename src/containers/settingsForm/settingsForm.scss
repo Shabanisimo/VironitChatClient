@@ -63,13 +63,37 @@
   }
 
   &--input {
+    box-sizing: border-box;
     width: 100%;
     height: 35px;
+    background: #f4f4f8;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 14px;
+
+    &::placeholder {
+      text-align: center;
+    }
+
+    &:focus::placeholder {
+      text-align: left;
+    }
   }
 
   &--btn {
     width: 100px;
     height: 40px;
+  }
+
+  &--first-form {
+    width: 100%;
+    float: left;
+  }
+
+  &--second-form {
+    width: 100%;
+    float: right;
   }
 }
 

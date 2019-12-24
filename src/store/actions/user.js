@@ -64,10 +64,7 @@ export const asyncRegistration = (name, surname, email, password) => dispatch =>
     return false;
   });
 
-export const updateUserInfo = (name, surname, email) => (
-  dispatch,
-  getState
-) => {
+export const updateUserInfo = (name, surname) => (dispatch, getState) => {
   const {
     userInfo: { token, id },
     userInfo,
@@ -75,13 +72,11 @@ export const updateUserInfo = (name, surname, email) => (
   return request('user/updateUserInfo', 'PUT', {
     name,
     surname,
-    email,
     token,
   }).then(data => {
-    const { name, surname, email } = data;
+    const { name, surname } = data;
     userInfo.name = name;
     userInfo.surname = surname;
-    userInfo.email = email;
     userInfo.id = id;
     dispatch(addUserInfo(userInfo));
   });
